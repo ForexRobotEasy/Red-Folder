@@ -1,0 +1,86 @@
+
+//Developer: Forex Robot Easy Team
+//Website: forexroboteasy.com
+
+//Include necessary libraries
+#include <Trade\Trade.mqh>
+#include <Expert\Expert.mqh>
+#include <Timeseries\Timeseries.mqh>
+
+//Define global variables
+CTrade trade; //Trade class object
+CTimeseries series; //Timeseries class object
+
+//Define function to handle start event
+void OnStart()
+{
+   //Initialize trade and series objects
+   trade.Initialize();
+   series.Initialize();
+
+   //Subscribe to necessary events
+   EventSetInteger(ENUM_EVENT_TIMER, 1); //Trigger event every second
+   EventSetTimer(1); //Enable timer event
+
+   //Main trading logic
+   while(!IsStopped())
+   {
+      //Check if there are any new trading signals
+      if(IsNewSignal())
+      {
+         //Execute trade based on predetermined criteria
+         ExecuteTrade();
+      }
+
+      //Check if it's time for news event trading
+      if(IsNewsEventTime())
+      {
+         //Execute trade based on pre-set news event parameters
+         ExecuteNewsEventTrade();
+      }
+
+      //Sleep for a short interval before checking for new signals again
+      Sleep(1000);
+   }
+}
+
+//Function to check if there are any new trading signals
+bool IsNewSignal()
+{
+   //Insert your code to check for new trading signals here
+   //Return true if there is a new signal, false otherwise
+}
+
+//Function to execute trade based on predetermined criteria
+void ExecuteTrade()
+{
+   //Insert your code to execute trade here
+}
+
+//Function to check if it's time for news event trading
+bool IsNewsEventTime()
+{
+   //Insert your code to check if it's time for news event trading here
+   //Return true if it's time for news event trading, false otherwise
+}
+
+//Function to execute trade based on pre-set news event parameters
+void ExecuteNewsEventTrade()
+{
+   //Insert your code to execute news event trade here
+}
+
+//Function to handle timer event
+void OnTimer()
+{
+   //Update timeseries data
+   series.Update();
+
+   //Insert your code to update any necessary data here
+}
+
+//Function to handle stop event
+void OnStop()
+{
+   //Insert your code to clean up and close any open trades here
+}
